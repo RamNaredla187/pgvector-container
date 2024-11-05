@@ -1,7 +1,6 @@
 ## pgvector
-#  
-  >docker run --name pgvector -e POSTGRES_PASSWORD=pg -v pgvect:/var/lib/postgresql/data -e POSTGRES_DB=data -p 5432:5432 -d pgvector/pgvector:pg17
-#
+  
+##  >docker run --name pgvector -e POSTGRES_PASSWORD=pg -v pgvect:/var/lib/postgresql/data -e POSTGRES_DB=data -p 5432:5432 -d pgvector/pgvector:pg17
 
 #* docker run: This command is used to create and start a new container based on a specified image.
 #* --name pgvector: This option assigns the name "pgvector" to the container, making it easier to reference later.
@@ -13,34 +12,34 @@
 #* pgvector/pgvector:pg17: This specifies the Docker image to use for creating the container. In this case, it’s using the pgvector image compatible with PostgreSQL version 17.
 
 ##login into container
-#
-  docker exec -it pgvector bash
 
-  psql -U postgres -p 5432 -d data
-#
+##  docker exec -it pgvector bash
+
+## psql -U postgres -p 5432 -d data
+
 ## After enter into database we can add pgvector extention
-#
-  CREATE EXTENSION vector;
-#
-# * The command CREATE EXTENSION  vector; is used in PostgreSQL to load the pgvector extension into the current database. This extension provides functionality for handling vector data, which is essential for applications involving machine learning and artificial intelligence, particularly for tasks like similarity search and embedding storage.
+
+##  CREATE EXTENSION vector;
+
+#* The command CREATE EXTENSION  vector; is used in PostgreSQL to load the pgvector extension into the current database. This extension provides functionality for handling vector data, which is essential for applications involving machine learning and artificial intelligence, particularly for tasks like similarity search and embedding storage.
 
 ## Create Database in database
-#
- create database ram;
-#
+
+#### create database ram;
+
 ## list all the data bases
- # 
-  >\l
-#
+ 
+###  >\l
+
 ## switch to another database
- #
-    >\c ram;
-#
+ 
+##    >\c ram;
+
 
 ## create table and insert data into it
-##
+
     CREATE TABLE embeddings (
-    id SERIAL PRIMARY KEY,
+   id SERIAL PRIMARY KEY,
     vector VECTOR(3)  -- Specify the dimensionality of your vectors here
    );
 
@@ -51,12 +50,12 @@
     ('[0.4, 0.5, 0.6]'), 
     ('[0.7, 0.8, 0.9]');
 
-#
+
 
 ## To see the table 
-#
-  SELECT * FROM embeddings;
-#
+
+### SELECT * FROM embeddings;
+
  ram=# select * from emb;
  id |    vector
 ----+---------------
@@ -66,24 +65,18 @@
 
 
 ## create a pgvector conatainer with user
-## docker run --name pgvector \
--e POSTGRES_USER=postgres \
--e POSTGRES_PASSWORD=pg \
--e POSTGRES_DB=data \
--v pgvect:/var/lib/postgresql/data \
--p 5432:5432 \
--d pgvector/pgvector:pg16
+### docker run --name pgvector -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=pg -e POSTGRES_DB=data -v pgvect:/var/lib/postgresql/data -p 5432:5432 -d pgvector/pgvector:pg16
 
 
 ## Create user in pgvector database
-# 
-  CREATE USER new_username WITH PASSWORD 'your_password';
 
-#
+###  CREATE USER new_username WITH PASSWORD 'your_password';
+
+
 ## grant permissions to users
-# 
-  GRANT ALL PRIVILEGES ON DATABASE data TO new_username;
-#
+
+###  GRANT ALL PRIVILEGES ON DATABASE data TO new_username;
+
 
 
 
